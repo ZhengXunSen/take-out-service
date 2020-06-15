@@ -1,0 +1,13 @@
+package com.dream.takeoutservice;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class TakeOutSeriveApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}

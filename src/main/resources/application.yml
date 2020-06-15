@@ -1,0 +1,31 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: take-out-service
+#mybatis plus config begin
+mybatis-plus:
+  mapper_locations: classpath:mapper/*.xml
+  type-aliases-package: com.dream.takeoutservice.model
+  configuration:
+    mapUnderscoreToCamelCase: true
+#mybatis config end
+---
+spring:
+  profiles: dev
+  redis:
+    host: zxs-1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 50
+        max-idle: 8
+        max-wait: -1ms
+        min-idle: 4
+    timeout: 3000ms
+  datasource:
+    jdbcUrl: jdbc:mysql://zxs-1:3306/dc?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=GMT%2B8
+    username: zxs
+    driver-class-name: com.mysql.jdbc.Driver
+    password: jfz123456
