@@ -22,9 +22,10 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Throwable.class)
     @ResponseBody
-    ResponseEntity handleControllerException(HttpServletRequest request, Throwable ex) {
+    public ResponseEntity<Object> handleControllerException(HttpServletRequest request, Throwable ex) {
         HttpStatus status = getStatus(request);
-        int statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();  // 默认500，服务器内部异常
+        // 默认500，服务器内部异常
+        int statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
         if (ex instanceof ZxsParamsException) {
             logger.info("接口访问异常[" + request.getRequestURI() + "]", ex);
         } else {
@@ -36,7 +37,7 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
         if (ex instanceof ZxsEnumRuntimeException) {
             statusCode = ((ZxsEnumRuntimeException) ex).getErrorCode();
         }
-        return new ResponseEntity(ApiResponse.failure(statusCode, ex.getMessage()), status);
+        return new ResponseEntity<>(ApiResponse.failure(statusCode, ex.getMessage()), status);
     }
 
     private HttpStatus getStatus(HttpServletRequest request) {

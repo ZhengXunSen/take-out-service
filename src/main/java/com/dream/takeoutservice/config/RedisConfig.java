@@ -3,7 +3,6 @@ package com.dream.takeoutservice.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cache.CacheManager;
@@ -27,6 +26,7 @@ import java.util.Set;
 
 /**
  * Created by bill.zheng in 2018/11/5
+ * @author lenovo
  */
 @Configuration
 @EnableAutoConfiguration
@@ -36,16 +36,15 @@ public class RedisConfig {
     @Value("${redis.cache.duration}")
     private Long duration;
 
-    @Autowired
-    private RedisTemplate redisTemplate;
-
     /**
      * 解决redis插入中文乱码
      *
-     * @return
+     * @return redisTemplate redis操作类
      */
     @Bean
-    public RedisTemplate redisTemplateInit() {
+    public RedisTemplate<Object,Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<Object,Object> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(connectionFactory);
         //设置序列化Key的实例化对象
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         //设置序列化Value的实例化对象
@@ -55,7 +54,7 @@ public class RedisConfig {
 
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
@@ -75,7 +74,7 @@ public class RedisConfig {
 
         // 对每个缓存空间应用不同的配置
         Map<String, RedisCacheConfiguration> configMap = new HashMap<>();
-        configMap.put("fetch-redis-cache", config);
+        configMap.put("take-out-service-redis-cache", config);
 
         // 使用自定义的缓存配置初始化一个cacheManager
         return RedisCacheManager.builder(connectionFactory).cacheDefaults(config)

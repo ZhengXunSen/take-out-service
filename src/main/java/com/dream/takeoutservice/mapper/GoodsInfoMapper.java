@@ -1,7 +1,11 @@
 package com.dream.takeoutservice.mapper;
 
-import com.dream.takeoutservice.entity.GoodsInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.dream.takeoutservice.entity.GoodsInfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface GoodsInfoMapper extends BaseMapper<GoodsInfo> {
 
+    List<GoodsInfo> getGoodsInfoByCategoryId(@Param("page") IPage<GoodsInfo> page,@Param("categoryId") Long categoryId);
 }

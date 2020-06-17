@@ -11,7 +11,9 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import javax.annotation.Resource;
 
 /**
- * Created by jackie.yu on 2017/9/12.
+ *
+ * @author jackie.yu
+ * @date 2017/9/12
  */
 @Configuration
 @EnableScheduling

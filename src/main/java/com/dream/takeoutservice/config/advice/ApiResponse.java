@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 
 /**
  * API调用的通用结果
- * Created by roman.luo on 2017/7/18.
+ *
+ * @author roman.luo
+ * @date 2017/7/18
  */
 @Data
 public class ApiResponse<T> {
@@ -30,15 +32,15 @@ public class ApiResponse<T> {
         this.data = data;
     }
 
-    public static ApiResponse success(Object data) {
-        return new ApiResponse(data);
+    public static ApiResponse<Object> success(Object data) {
+        return new ApiResponse<>(data);
     }
 
-    public static ApiResponse failure(String message) {
+    public static ApiResponse<Object> failure(String message) {
         return failure(HttpStatus.INTERNAL_SERVER_ERROR.value(), message);
     }
 
-    public static ApiResponse failure(int statusCode, String message) {
-        return new ApiResponse(statusCode, message, null);
+    public static ApiResponse<Object> failure(int statusCode, String message) {
+        return new ApiResponse<>(statusCode, message, null);
     }
 }

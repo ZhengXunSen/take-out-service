@@ -11,8 +11,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * 统一json返回处理
  * @author bill zheng
  */
-@ControllerAdvice(basePackages = "com.zxs.cloud.fetch.controller")
-public class ResultJsonResponseAdvice implements ResponseBodyAdvice {
+@ControllerAdvice(basePackages = "com.dream.takeoutservice.controller")
+public class ResultJsonResponseAdvice<T> implements ResponseBodyAdvice<T> {
 
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {

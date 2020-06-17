@@ -1,9 +1,12 @@
 package com.dream.takeoutservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dream.takeoutservice.entity.CategoryInfo;
 import com.dream.takeoutservice.mapper.CategoryInfoMapper;
 import com.dream.takeoutservice.service.CategoryInfoService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,5 +19,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoryInfoServiceImpl extends ServiceImpl<CategoryInfoMapper, CategoryInfo> implements CategoryInfoService {
+
+
+    @Override
+    public IPage<CategoryInfo> getAllCategory(int pageNum, int pageSize) {
+        Page<CategoryInfo> page = new Page<>(pageNum, pageSize);
+        return baseMapper.selectPage(page,new LambdaQueryWrapper<CategoryInfo>().eq(CategoryInfo::getIsValid, true));
+    }
+
 
 }

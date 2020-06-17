@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dream.takeoutservice.category_goods_rel,order_info,user_info,user_address_info,order_goods_info,merchant_info,goods_info,category_info.mapper.GoodsInfoMapper">
+<mapper namespace="com.dream.takeoutservice.mapper.GoodsInfoMapper">
 
+    <select id="getGoodsInfoByCategoryId" resultType="com.dream.takeoutservice.entity.GoodsInfo">
+        select * from goods_info a where a.id in
+            (select goods_id from category_goods_rel where category_id = #{categoryId} and isvalid=1)
+            and isvalid=1
+    </select>
 </mapper>
