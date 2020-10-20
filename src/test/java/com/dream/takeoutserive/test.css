@@ -1,0 +1,21 @@
+@charset "utf @charset "utf @charset "utf@charset "utf @charset "utf @charset "utf-8";8";8";
+/* CSS Document *//* CSS Document *//* CSS Document */ /* CSS Document */ /* CSS Document */ /* CSS Document */ /* CSS Document *//* CSS Document *//* CSS Document */
+Message {
+	text-align:center;
+    font-size:12px;
+	color:#555;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    background-color: green;
+}
+message.content.title {
+	
+	font-size:14px;
+    font-weight:bold;
+	color:#666699
+}
+message.content.description {
+	color:#666699
+}
+message.content.suggestions {
+	color:#0000ff
+}
